@@ -36,3 +36,50 @@ Folge diesen Schritten strikt. Abweichungen können zum Ausschluss aus der Beta-
 ```bash
 git clone [https://github.com/DEIN_USERNAME/operation-fairteiler.git](https://github.com/DEIN_USERNAME/operation-fairteiler.git)
 cd operation-fairteiler
+2. Virtuelle Umgebung erstellen
+Isolation ist wichtig – bei Lebensmitteln wie bei Software.
+
+Windows:
+
+Bash
+python -m venv venv
+.\venv\Scripts\activate
+Mac/Linux:
+
+Bash
+python3 -m venv venv
+source venv/bin/activate
+3. Abhängigkeiten installieren
+Bash
+pip install -r requirements.txt
+4. Die Simulation starten
+Bash
+streamlit run app.py
+Das Spiel öffnet sich nun automatisch in deinem Standard-Browser (meistens unter http://localhost:8501). Sollte dies nicht geschehen, hast du vermutlich vergessen, den Passierschein A38 zu beantragen (oder klicke einfach auf den Link im Terminal).
+
+🗺️ Roadmap (Arbeitsgruppen-Ziele)
+[x] Phase 1: Grundgerüst & Quiz-Logik (Erledigt)
+
+[ ] Phase 2: Implementierung des "BIEB"-Modus (Betriebsverantwortlichen-Dashboard)
+
+[ ] Phase 3: Multiplayer-Funktion "Plenum" (Endlose Diskussionen ohne Ergebnis)
+
+[ ] Phase 4: DLC "Mettbrötchen-Paradoxon" (Kostenpflichtig... nein Scherz, wir nehmen kein Geld!)
+
+🤝 Mitwirken (Arbeitskreis Code)
+Du möchtest Code beitragen? Bitte beachte die Wiki: Wer darf Öffentlichkeitsarbeit machen?.
+
+Erstelle einen Fork.
+
+Erstelle einen Feature-Branch (git checkout -b feature/neue-verordnung).
+
+Reiche einen Pull-Request ein (muss 3-fach unterschrieben sein).
+
+⚖️ Disclaimer & Rechtliches
+Dieses Spiel ist eine Satire. Es steht in keiner offiziellen Verbindung zu foodsharing.de, foodsharing.at oder dem foodsharing e.V..
+
+Alle Ähnlichkeiten mit echten Betriebsverantwortlichen, Bezirksleitungen oder Fairteilern sind rein zufällig und satirisch überhöht.
+
+Bitte verklagt uns nicht. Wir haben kein Geld, wir haben nur altes Brot.
+
+Referenzierte Wiki-Regeln sind echt, ihre Anwendung im Spiel dient jedoch der Unterhaltung.
