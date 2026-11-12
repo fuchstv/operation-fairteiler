@@ -5,6 +5,62 @@ und ein separates Lernabenteuer über den Weg zum Foodsaver. Wähle den Modus in
 der Seitenleiste. Szenen und Dialoge sind erfunden; im Lernmodus verlinken die
 Regelhinweise auf das Wiki. Das Spiel ersetzt keine echte Qualifizierung.
 
+## Lokal im Browser starten – ohne Installation
+
+1. Die Datei **index.html** herunterladen bzw. das Repository als ZIP entpacken.
+2. **index.html per Doppelklick im Browser öffnen.** Es ist kein Server nötig.
+3. Spielen. Das Spiel benötigt weder Python noch Streamlit, Node.js oder Internet.
+
+Die einzelne HTML-Datei enthält alle 152 Items, Spieltexte, Styles und den
+JavaScript-Spielkern. Sie kann allein in einen anderen Ordner kopiert werden.
+Sounds werden nach Aktivierung lokal per WebAudio erzeugt; Wiki-Links sind
+optionale externe Verweise. Es werden keine Daten übertragen.
+
+Browser-Spielstände werden nach Aktionen automatisch in `localStorage`
+gespeichert. **Spielstand exportieren** lädt eine JSON-Datei herunter;
+**Spielstand importieren** stellt sie wieder her. Browser können lokale Daten
+bei privaten Sitzungen, geänderten Dateipfaden oder restriktiven Einstellungen
+anders behandeln. Für dauerhafte Sicherungen die Exportfunktion nutzen.
+Ein ungültiger Import lässt den bisherigen Spielstand unverändert. Ein beim
+Start unlesbarer Spielstand wird erst bei ausdrücklich bestätigtem Neustart
+oder gültigem Import ersetzt.
+
+Die Browser-Version enthält Charakterwürfe, Stat-Checks mit farbigen Tooltips,
+Abholbriefings, Routen, Kämpfe, Tonnenrunden, alle Ausrüstungsplätze und
+Verbrauchsgegenstände, Verdauung, BOT/BV-Interaktionen, Fairteilung inklusive
+Essenskorb und Hygieneplan, Hotseat-PvP und das Lernabenteuer. Browser und Python
+verwenden unterschiedliche Zufallsgeneratoren; gleiche Seeds erzeugen nicht
+plattformübergreifend dieselben Würfe. Browser-Exporte sind keine
+Streamlit-Spielstände. Online-PvP und echte Plattformaktionen sind nicht enthalten.
+
+### Browser-Version weiterentwickeln
+
+Die fertige `index.html` ist versioniert. Zum **Spielen** ist kein Build nötig.
+Entwicklungsvorlagen liegen unter `web/`; die Daten werden aus den bestehenden
+Python-Modulen übernommen. Zum Aktualisieren nach einer Änderung:
+
+```bash
+python3 scripts/build_web.py
+node --test web/engine.test.cjs
+```
+
+Der Build braucht nur Python-Standardbibliothek und die vorhandenen
+Projektmodule; Node.js wird ausschließlich für die JavaScript-Tests benötigt.
+`web/data.json` und `index.html` werden deterministisch generiert. `web/engine.js`
+enthält die portablen Regeln, `web/ui.js` die Browseroberfläche. Für Änderungen
+zusätzlich den echten Offline-Start per `file://` in Desktop- und Mobilansicht
+prüfen. Die Streamlit-Version kann weiterhin wie unten beschrieben gestartet
+werden.
+
+Die automatisierten Browserprüfungen lassen sich mit installiertem Playwright
+und Chromium über `python3 scripts/test_web_browser.py` wiederholen (standardmäßig
+per `file://`). Optional: `--chromium /pfad/zum/browser` und
+`--url http://127.0.0.1:8877/index.html` für eine lokale Testadresse.
+In der verwalteten Cloud wurde der direkte `file://`-Aufruf durch eine
+Administratorrichtlinie blockiert. Geprüft wurden stattdessen die unveränderte
+HTML über eine Loopback-Adresse, der eingebettete Inhalt bei vollständig
+deaktiviertem Netzwerk sowie Speichern, Neuladen, Import/Export und Mobilansicht.
+
 ## Roguelike: Operation Feierabend
 
 - Fünf Abholtage im selben Stammbezirk mit je vier Stationen, verzweigten Routen und acht Betrieben:
@@ -34,7 +90,7 @@ foodsharing, Lebensmittelhygiene oder medizinische Behandlung. Automatische
 Sitzungsspeicherung im Browser oder ein Server für Online-Spieler sind nicht
 enthalten. Fortschritt und lokales Duell leben in der Streamlit-Sitzung.
 
-## Spielen und entwickeln
+## Streamlit-Version spielen und entwickeln
 
 Python 3.12 wurde getestet. Das Projekt benötigt ausschließlich Streamlit;
 Datenbank, externe Mediendienste und Zugangsdaten sind nicht erforderlich.
